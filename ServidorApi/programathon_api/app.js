@@ -10,8 +10,10 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var createPacientRouter = require('./routes/createPacient');
+var etniasRouter = require('./routes/getEtnias');
 var session = require('express-session');
 var app = express();
+
 
 var cors = require('cors');
 app.use(cors());
@@ -48,6 +50,7 @@ app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/createpacient', createPacientRouter);
+app.use('/getEtnias', etniasRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
