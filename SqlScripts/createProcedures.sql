@@ -44,7 +44,6 @@ END //
 DELIMITER ;
 
 
-
 DROP PROCEDURE IF EXISTS spInsertarPaciente;
 
 DELIMITER //
@@ -56,11 +55,12 @@ CREATE PROCEDURE spInsertarPaciente
 	IN pCedula VARCHAR(20),
 	IN pEdad SMALLINT,
 	IN pGenero VARCHAR(20),
+	IN pParentesco VARCHAR(20),
 	IN pId_etnia INT
 )
 BEGIN
-	INSERT INTO paciente(nombre, id_usuario,cedula,edad,genero,id_etnia,activo)
-	VALUES(pNombre,pId_usuario,pCedula,pEdad,pGenero,pId_etnia,1);
+	INSERT INTO paciente(nombre, id_usuario,cedula,edad,genero,id_etnia,parentesco,activo)
+	VALUES(pNombre,pId_usuario,pCedula,pEdad,pGenero,pId_etnia,pParentesco,1);
 
 END //
 

@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS paciente(
 	edad SMALLINT,
 	genero VARCHAR(20),
 	id_etnia INT NOT NULL,
+	parentesco VARCHAR(20),
 	activo BOOL
 );
 
@@ -37,6 +38,7 @@ REFERENCES usuario(id_usuario);
 ALTER TABLE paciente
 ADD FOREIGN KEY (id_etnia) 
 REFERENCES etnia(id_etnia);
+
 
 
 CREATE TABLE IF NOT EXISTS enfermedad(

@@ -20,12 +20,15 @@ CALL spInsertarUsuario('peda',
 
 CALL spInsertarPaciente(
 	'Bryan',
+    
 	1,
 	'11111111',
 	20,
 	'Hombre',
+    'hijo',
 	1
 	);
+
 
 
 CALL spInsertarEnfermedad(
