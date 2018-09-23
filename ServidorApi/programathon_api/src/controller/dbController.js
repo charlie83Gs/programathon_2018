@@ -181,11 +181,6 @@ module.exports.insertarTratamientoFisico = function(id_tratamiento,detalle,callb
 	});
 	
 	}
-module.exports.getEtnias = function(callback){
-	let connection = createConnection();
-	let sql = 'CALL spGetEtnias()';
-	re
-	}
 
 module.exports.getEtnias = function(callback){
 	let connection = createConnection();
