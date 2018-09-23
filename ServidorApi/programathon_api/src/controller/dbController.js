@@ -45,13 +45,30 @@ module.exports.validateUser = function(username, password, callback) {
 	
 	}
 
-module.exports.getUserId = function(username, callback) {
+module.exports.validateUserCorreo = function(correo, password, callback) {
 	let connection = createConnection();
-	console.log("getting id");
-	let sql = 'CALL spGetUserId(?)';
+	let sql = 'CALL spValidarUsuarioCorreo( ?, ?)';
 	result = false;
 	connect(connection);
-	connection.query(sql, username, function(err, rows,fields) {
+	connection.query(sql, [correo,password], function(err, rows,fields) {
+		if(err) {
+	     console.log(err);  
+	 	}else{
+	 		callback(rows[0][0].result == "1");
+	 		console.log(correo + " login : "+ (rows[0][0].result == "1"));
+	 	}
+	 	connection.end();
+	});
+	
+	}
+
+module.exports.getUserId = function(correo, callback) {
+	let connection = createConnection();
+	console.log("getting id");
+	let sql = 'CALL spGetUserIdCorreo(?)';
+	result = false;
+	connect(connection);
+	connection.query(sql, correo, function(err, rows,fields) {
 		if(err) {
 	     console.log(err);  
 	 	}else{

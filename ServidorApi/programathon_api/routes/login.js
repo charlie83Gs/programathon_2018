@@ -3,11 +3,11 @@ var router = express.Router();
 var db = require('../src/controller/dbController.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	let user = req.query.username;
+	let user = req.query.correo;
 	let pass = req.query.password; 
 	if(user !== undefined && pass !== undefined){
 		//console.log(req.params.username + "   " + req.params.password)
-	db.validateUser(user,pass,function(result){
+	db.validateUserCorreo(user,pass,function(result){
 		req.session.user = {};
 		if(result){
 			req.session.user.valid = true;
@@ -17,6 +17,9 @@ router.get('/', function(req, res, next) {
 				//console.log("req " + req.session.user.id_usuario);
 			});
 
+		}else{
+			req.session.user.valid = false;
+			res.send({valid : false});
 		}
 		
 	});

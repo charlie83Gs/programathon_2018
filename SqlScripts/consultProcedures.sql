@@ -15,6 +15,23 @@ END //
 
 DELIMITER ;
 
+
+
+DROP PROCEDURE IF EXISTS spGetUserIdCorreo;
+
+DELIMITER //
+
+CREATE PROCEDURE spGetUserIdCorreo
+(
+	IN	pCorreo VARCHAR(40)
+)
+BEGIN
+	SELECT id_usuario FROM usuario WHERE pCorreo LIKE correo LIMIT 1;
+
+END //
+
+DELIMITER ;
+
 DROP PROCEDURE IF EXISTS spGetPacientAmount;
 
 DELIMITER //
