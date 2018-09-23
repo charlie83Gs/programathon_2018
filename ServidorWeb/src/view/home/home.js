@@ -11,6 +11,7 @@ class Home extends Component {
       
       this.navigateChildRegister = this.navigateChildRegister.bind(this);
       this.navigateLogin = this.navigateLogin.bind(this);
+      this.navigateRegAnt = this.navigateRegAnt.bind(this);
 
     }
 
@@ -23,6 +24,9 @@ class Home extends Component {
    this.state.navigator.goToView(routes.Login);
   }
 
+  navigateRegAnt(){
+   this.state.navigator.goToView(routes.RegistroAntecedentes);
+  }
 
   render() {
     return (
@@ -34,6 +38,7 @@ class Home extends Component {
           Ha ingresado.
         </p>
           <a onClick={this.navigateChildRegister}>Agregar Paciente</a><br/>
+          <a onClick={this.navigateRegAnt}>Agregar Antecedente(s) a Paciente</a><br/>
           <a onClick={this.navigateLogin}>Salir</a>
       </div>
     );
