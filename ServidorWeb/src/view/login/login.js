@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, Form, Col } from "react-bootstrap";
 import "./login.css";
 import {routes} from '../../routes/routes.js';
 
@@ -43,25 +43,44 @@ class Login extends Component {
   
   render() {
     return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="correo" bsSize="large">
-            <ControlLabel>Correo electrónico</ControlLabel>
-            <FormControl autoFocus type="correo" value={this.state.correo} onChange={this.handleChange}/>
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Contraseña</ControlLabel>
-            <FormControl value={this.state.password} onChange={this.handleChange} type="password"/>
-          </FormGroup>
-          <Button block bsSize="large" disabled={!this.validateForm()} type="submit" onClick={this.validateSession}> Ingresar </Button>
-          <br/>
-          <a onClick={this.navigateRegister}>
-            <h5> Registrarse </h5>
-          </a>
-        </form>
+      <div className={"center-div"} >
+        <div className={""}>
+          <h1 className={"centTitle"}>Cube Medic</h1>
+          <Form className={"divCuadro"} horizontal>
+            <FormGroup controlId="correo">
+              <Col componentClass={ControlLabel} sm={2}>
+                Correo Electrónico
+              </Col>
+              <Col sm={10}>
+                <FormControl className={"tamText"} autoFocus type="correo" value={this.state.correo} onChange={this.handleChange}/>
+              </Col>
+            </FormGroup>
+
+            <FormGroup controlId="password">
+              <Col componentClass={ControlLabel} sm={2}>
+                Password
+              </Col>
+              <Col sm={10}>
+                <FormControl className={"tamText"} value={this.state.password} onChange={this.handleChange} type="password"/>
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Col smOffset={2} sm={9}>
+                <a>Registrarse.</a>
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col smOffset={2} sm={9}>
+                <Button className={"tamButtom"} block bsSize="large" disabled={!this.validateForm()} type="submit"> Ingresar </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </div>
       </div>
     );
   }
 }
 
 export default Login;
+

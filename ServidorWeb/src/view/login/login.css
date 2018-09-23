@@ -7,4 +7,55 @@
     margin: 0 auto;
     max-width: 320px;
   }
+  .middle{
+  	  background-color: #123456;
+      color: #FFFFFF;
+      max-width: 50%;
+      vertical-align: middle;
+      align-items: center;
+  }
+  .centrado{
+  	align-content: center;
+  }
+
+  .tamText{
+  	max-width: 90%;
+
+  }
+
+  .tamButton{
+  	max-width: 60%;
+  	border-color: #123456; 
+  	background: #FFFFFF;
+  	color: #123456;
+  }
+
+  .centTitle{
+  	text-align: center;
+  }
+
+  .col-centered{
+  	float:none;
+  	margin: 0 auto;
+  }
+  .center-div{
+	  position: absolute;
+	  margin: auto;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  width: 50%;
+	  height: 280px;
+	  background: #FFFFFF;
+	}
+
+	.divCuadro{
+		background-color: #FFFFFF;
+		color: #123456;
+	}
+
+	body{
+		background: #123456;
+	}
 }
