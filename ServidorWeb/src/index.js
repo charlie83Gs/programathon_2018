@@ -4,7 +4,7 @@ import './index.css';
 import {routes} from  "./routes/routes.js";
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<routes.Default/>, document.getElementById('root'));
+ReactDOM.render(<routes.Navigator/>, document.getElementById('root'));
 registerServiceWorker();
 
 

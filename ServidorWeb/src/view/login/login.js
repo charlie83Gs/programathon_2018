@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./login.css";
+import {routes} from '../../routes/routes.js';
 
 class Login extends Component {
   constructor(props) {
@@ -8,8 +9,13 @@ class Login extends Component {
   
     this.state = {
 	   correo: "",
-	   password: ""
+	   password: "",
+	   navigator: this.props.navigator
     };
+    
+    this.validateSession = this.validateSession.bind(this);
+    this.navigateRegister = this.navigateRegister.bind(this);
+
   }
   
   validateForm() {
@@ -27,6 +33,14 @@ class Login extends Component {
     event.preventDefault();
   }
   
+  validateSession(){
+	this.state.navigator.goToView(routes.Home);
+  }
+  
+  navigateRegister(){
+	this.state.navigator.goToView(routes.Register);
+  }
+  
   render() {
     return (
       <div className="Login">
@@ -39,7 +53,11 @@ class Login extends Component {
             <ControlLabel>Contraseña</ControlLabel>
             <FormControl value={this.state.password} onChange={this.handleChange} type="password"/>
           </FormGroup>
-          <Button block bsSize="large" disabled={!this.validateForm()} type="submit"> Ingresar </Button>
+          <Button block bsSize="large" disabled={!this.validateForm()} type="submit" onClick={this.validateSession}> Ingresar </Button>
+          <br/>
+          <a onClick={this.navigateRegister}>
+            <h5> Registrarse </h5>
+          </a>
         </form>
       </div>
     );
