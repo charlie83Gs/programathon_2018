@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel, Col } from "react-bootstr
 import "./register.css";
 import {routes} from '../../routes/routes.js';
 import * as stringSimilarity from 'string-similarity';
+import {constants} from '../../component/constants.js';
 
 export const caract = {
   background: "#128056",
@@ -147,6 +148,21 @@ class Register extends Component {
   }
     
   validateSession(){
+  	 fetch(constants.API_URL + ":"+ constants.API_PORT+
+  	 	"/register?username="+this.state.nombre+
+  	 	"&password="+this.state.password +
+  	 	"&correo="+this.state.correo +
+  	 	"&cedula="+this.state.cedula +
+  	 	"&phone="+this.state.telefono
+
+  	 	).then(
+        results => {
+        	console.log(results)
+          return results.json();
+        }).then((result) =>{ 
+          console.log(result)
+          }
+        );
 	this.state.navigator.goToView(routes.Home);
   }  
 
@@ -180,7 +196,7 @@ class Register extends Component {
             <FormGroup>
               <Col>
                 <Button className={"tamButtonSign"} style={caract} block bsSize="large" disabled={!this.validateForm()} type="submit"> Registrar usuario</Button>
-                <Button className={"tamButtonSign"} style={caract} block bsSize="large" type="submit" onClick={this.navigateLogin}> Cancelar</Button>
+                <Button className={"tamButtonSign"} style={caract} block bsSize="large" type="submit" onClick={this.validateSession}> Cancelar</Button>
               </Col>
             </FormGroup>
           </form>
