@@ -26,7 +26,7 @@ class ChildRegister extends Component {
 	var numeroRE = /\d+/;
 
 	var nombreValido = this.state.nombre.length >= 2 && this.state.nombre.length <= 35 && nombreRE.exec(this.state.nombre);
-	var cedulaValida = (this.state.cedula.length === 9 && numeroRE.exec(this.state.cedula)) || (this.state.cedula.length == 0);
+	var cedulaValida = (this.state.cedula.length === 9 && numeroRE.exec(this.state.cedula)) || (this.state.cedula.length === 0);
 	var edadValida = this.state.edad.length <= 2 && this.state.edad.length >= 1 && numeroRE.exec(this.state.edad);
 	var medicamentoValido = this.state.nombremedicamento.length >= 2 && this.state.nombremedicamento >= 30;
 	var duracionValida = this.state.duraciontratam > 0 && this.state.duraciontratam <= 365;
@@ -62,7 +62,7 @@ class ChildRegister extends Component {
             <ControlLabel>Número de identificación (cédula): </ControlLabel>
             <FormControl value={this.state.cedula} onChange={this.handleChange} type="number"/>
           </FormGroup>
-          <Button block bsSize="large" disabled={!this.validateForm()} type="submit"> Registrar menor </Button>
+          <Button block bsSize="large" disabled={!this.validateForm} type="submit"> Registrar menor </Button>
         </form>
       </div>
     );
