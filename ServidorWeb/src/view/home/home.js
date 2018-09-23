@@ -12,6 +12,7 @@ class Home extends Component {
       this.navigateChildRegister = this.navigateChildRegister.bind(this);
       this.navigateLogin = this.navigateLogin.bind(this);
       this.navigateRegAnt = this.navigateRegAnt.bind(this);
+      this.navigateInterprete = this.navigateInterprete.bind(this);
 
     }
 
@@ -22,6 +23,10 @@ class Home extends Component {
 
   navigateLogin(){
    this.state.navigator.goToView(routes.Login);
+  }
+
+  navigateInterprete(){
+   this.state.navigator.goToView(routes.Interprete);
   }
 
   navigateRegAnt(){
@@ -39,6 +44,7 @@ class Home extends Component {
         </p>
           <a onClick={this.navigateChildRegister}>Agregar Paciente</a><br/>
           <a onClick={this.navigateRegAnt}>Agregar Antecedente(s) a Paciente</a><br/>
+          <a onClick={this.navigateInterprete}>Intérprete</a><br/>
           <a onClick={this.navigateLogin}>Salir</a>
       </div>
     );
