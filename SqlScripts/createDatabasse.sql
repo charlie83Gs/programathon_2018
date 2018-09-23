@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS etnia(
 
 CREATE TABLE IF NOT EXISTS paciente(
 	id_paciente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(40),
 	id_usuario INT NOT NULL,
 	cedula VARCHAR(20),
 	edad SMALLINT,
@@ -41,6 +42,7 @@ REFERENCES etnia(id_etnia);
 CREATE TABLE IF NOT EXISTS enfermedad(
 	id_enfermedad INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_paciente INT NOT NULL,
+	fecha DATE,
 	detalle VARCHAR(4096),
 	activo BOOL
 );
@@ -54,6 +56,7 @@ CREATE TABLE IF NOT EXISTS tratamiento(
 	id_tratamiento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_paciente INT NOT NULL,
 	detalle VARCHAR(4096),
+	fecha DATE,
 	activo BOOL
 );
 
