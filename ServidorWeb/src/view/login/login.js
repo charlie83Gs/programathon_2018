@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel, Form, Col } from "react-bootstrap";
 import "./login.css";
 import {routes} from '../../routes/routes.js';
+import {constants} from '../../component/constants.js';
+
 
 export const caract = {
   background: "#128056",
@@ -39,7 +41,19 @@ class Login extends Component {
   }
   
   validateSession(){
-  this.state.navigator.goToView(routes.Home);
+    console.log("validating...");
+    fetch(constants.API_URL + ":"+ constants.API_PORT+"/login?correo="+this.state.correo+"&password="+this.state.password).then(
+        results => {
+          return results.json();
+        }).then((result) =>{ 
+          console.log(result)
+          if(result.valid){
+            this.state.navigator.goToView(routes.Home);
+          }
+          }
+        );
+
+  //this.state.navigator.goToView(routes.Home);
   }
   
   navigateRegister(){
@@ -76,7 +90,7 @@ class Login extends Component {
 
             <FormGroup>
               <Col smOffset={1} sm={10}>
-                <Button className={"tamButtom"} style={caract} block bsSize="large" disabled={!this.validateForm()} type="submit" onClick={this.validateSession}> Ingresar </Button>
+                <Button className={"tamButtom"} style={caract} block bsSize="large" disabled={!this.validateForm()} onClick={this.validateSession}> Ingresar </Button>
               </Col>
             </FormGroup>
           </Form>

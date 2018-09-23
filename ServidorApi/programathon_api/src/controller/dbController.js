@@ -132,4 +132,70 @@ module.exports.insertPacient = function(name,id_usuario,cedula,edad,genero,paren
 	
 	}
 	
+module.exports.insertTratamiento = function(id_paciente,detalle,fecha,callback) {
+	let connection = createConnection();
+	let sql = 'CALL spInsertarTratamiento(?,?,?)';
+	result = false;
+	connect(connection);
+	connection.query(sql, [id_paciente,detalle,fecha], function(err, rows,fields) {
+	 	if(err) {
+	     console.log(err);  
+	 	}else{
+		//console.log(rows);
+	 	connection.end();
+	 	}
+	});
+	
+	}
 
+
+module.exports.insertarMedicina = function(id_tratamiento,nombre,dosis,detalle,fecha,fechaFin,callback) {
+	let connection = createConnection();
+	let sql = 'CALL spInsertarMedicina(?,?,?,?,?,?)';
+	result = false;
+	connect(connection);
+	connection.query(sql, [id_tratamiento,nombre,dosis,detalle,fecha,fechaFin], function(err, rows,fields) {
+	 	if(err) {
+	     console.log(err);  
+	 	}else{
+		//console.log(rows);
+	 	connection.end();
+	 	}
+	});
+	
+	}
+
+
+module.exports.insertarTratamientoFisico = function(id_tratamiento,detalle,callback) {
+	let connection = createConnection();
+	let sql = 'CALL spInsertarTratamientoFisico(?,?)';
+	result = false;
+	connect(connection);
+	connection.query(sql, [id_tratamiento,detalle], function(err, rows,fields) {
+	 	if(err) {
+	     console.log(err);  
+	 	}else{
+		//console.log(rows);
+	 	connection.end();
+	 	}
+	});
+	
+	}
+
+module.exports.getEtnias = function(callback){
+	let connection = createConnection();
+	console.log("getting Etnias");
+	let sql = 'CALL spGetEtnias()';
+	result = false;
+	connect(connection);
+	connection.query(sql, function(err, rows,fields) {
+		if(err) {
+	     console.log(err);  
+	 	}else{
+		console.log(rows);
+		callback();
+	 	connection.end();
+	 	}
+	});
+	
+	}

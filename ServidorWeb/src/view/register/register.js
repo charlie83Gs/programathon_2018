@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel, Col } from "react-bootstr
 import "./register.css";
 import {routes} from '../../routes/routes.js';
 import * as stringSimilarity from 'string-similarity';
+import {constants} from '../../component/constants.js';
 
 export const caract = {
   background: "#128056",
@@ -27,7 +28,7 @@ class Register extends Component {
     };
 
     this.navigateLogin = this.navigateLogin.bind(this);
-
+    this.validateSession = this.validateSession.bind(this);
   }
   
   navigateLogin(){
@@ -147,8 +148,24 @@ class Register extends Component {
   }
     
   validateSession(){
-	this.state.navigator.goToView(routes.Home);
-  }  
+  	 fetch(constants.API_URL + ":"+ constants.API_PORT+
+  	 	"/register?username="+this.state.nombre+
+  	 	"&password="+this.state.password +
+  	 	"&correo="+this.state.correo +
+  	 	"&cedula="+this.state.cedula +
+  	 	"&phone="+this.state.telefono
+
+  	 	).then(
+        results => {
+        	console.log(results)
+          return results.json();
+        }).then((result) =>{ 
+        	 	this.state.navigator.goToView(routes.Login);
+        	}
+          );	
+  } 
+
+
 
   render() {
     return (
@@ -179,7 +196,7 @@ class Register extends Component {
             </FormGroup>
             <FormGroup>
               <Col>
-                <Button className={"tamButtonSign"} style={caract} block bsSize="large" disabled={!this.validateForm()} type="submit"> Registrar usuario</Button>
+                <Button className={"tamButtonSign"} style={caract} block bsSize="large" disabled={!this.validateForm()} onClick={this.validateSession}> Registrar usuario</Button>
                 <Button className={"tamButtonSign"} style={caract} block bsSize="large" type="submit" onClick={this.navigateLogin}> Cancelar</Button>
               </Col>
             </FormGroup>
