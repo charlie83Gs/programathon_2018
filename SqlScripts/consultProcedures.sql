@@ -60,3 +60,20 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS spGetPacients;
+
+DELIMITER //
+
+CREATE PROCEDURE spGetPacients
+(
+	IN	pId_paciente INT
+)
+BEGIN
+	SELECT *
+    FROM paciente WHERE id_paciente LIKE pId_paciente
+    LIMIT 1;
+
+END //
+
+DELIMITER ;
