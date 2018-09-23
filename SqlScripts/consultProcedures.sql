@@ -46,3 +46,17 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS spGetEtenias;
+
+DELIMITER //
+
+CREATE PROCEDURE spGetEtenias
+(
+)
+BEGIN
+	SELECT nombre FROM etnia;
+
+END //
+
+DELIMITER ;
