@@ -37,7 +37,7 @@ class registro_antecedentes extends Component {
     }
     else{
       //codigo que se ejecuta si el formato del archivo no es válido
-      
+
     }
 
   }
@@ -52,7 +52,7 @@ class registro_antecedentes extends Component {
 
 
   handleHideLink() {
-    this.setState({ showArchivo: false });
+    this.setState({ showLink: false });
   }
 
 
@@ -159,9 +159,11 @@ class registro_antecedentes extends Component {
             </Modal.Header>
             <Modal.Body>
           Por favor, suba acá el archivo.
-            <input type="file" onChange={this.tomaArchivo} accept=".pdf,.txt,.docx,.jpg,.png,.tiff,.tif"/>
+            <input type="file" onChange={this.tomaArchivo} accept=".pdf,.txt,.docx,.jpg,.png,.tiff,.tif"/><br/>
+            <FormControl align="center" className={"centroText"} type="text" value={this.state.value} placeholder="Descripción" onChange={this.handleChange}/>
             </Modal.Body>
             <Modal.Footer>
+              <Button onClick={this.guardaArchivo}>Guardar</Button>
               <Button onClick={this.handleHideArchivo}>Cancelar</Button>
             </Modal.Footer>
           </Modal>
@@ -175,15 +177,19 @@ class registro_antecedentes extends Component {
           >
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title">
-                Pegue su enlace acá:
-                *Agregar text*
+                <div>
+                  Enlace
+                </div>
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body align="center" >
           Por favor, suba acá el archivo.
+              <FormControl align="center" className={"centroText"} type="text" value={this.state.value} placeholder="Ingrese link" onChange={this.handleChange}/><br/>
+              <FormControl align="center" className={"centroText"} type="text" value={this.state.value} placeholder="Descripción" onChange={this.handleChange}/>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={this.handleHideArchivo}>Cancelar</Button>
+                <Button onClick={this.guardaLink}>Guardar</Button>
+                <Button onClick={this.handleHideLink}>Cancelar</Button>
             </Modal.Footer>
             
             </Modal>
