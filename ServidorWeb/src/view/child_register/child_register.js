@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel,Radio,Col, InputGroup } from "react-bootstrap";
 import "./child_register.css";
 import {routes} from '../../routes/routes.js';
+
+export const caract = {
+  background: "#128056",
+  color: "#FFFFFF"
+}
 
 class ChildRegister extends Component {
   constructor(props) {
@@ -17,8 +22,13 @@ class ChildRegister extends Component {
 	  duraciontratam: "",
 	  tratamientofisico: "",
 	  enfermedades: "",
-	  etnia: ""
+	  etnia: "",
+    navigator: this.props.navigator
+
     };
+
+    this.navigateHome = this.navigateHome.bind(this);
+
   }
   
   validateForm() {
@@ -47,23 +57,76 @@ class ChildRegister extends Component {
   }
     
   validateSession(){
-	this.state.navigator.goToView(routes.Home);
+  this.state.navigator.goToView(routes.Home);
+  }
+
+  navigateHome(){
+  this.state.navigator.goToView(routes.Home);
   }  
 
   render() {
     return (
       <div className="ChildRegister">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="nombre" bsSize="large">
-            <ControlLabel>Nombre completo: </ControlLabel>
-            <FormControl value={this.state.nombre} onChange={this.handleChange}/>
-          </FormGroup>
-          <FormGroup controlId="cedula" bsSize="large">
-            <ControlLabel>Número de identificación (cédula): </ControlLabel>
-            <FormControl value={this.state.cedula} onChange={this.handleChange} type="number"/>
-          </FormGroup>
-          <Button block bsSize="large" disabled={!this.validateForm} type="submit"> Registrar menor </Button>
-        </form>
+        <div className={"center-div-child-reg"}>
+          <h1 className={"centTitleSign"}>Registro de Nuevo Paciente</h1><br/>
+          <form horizontal onSubmit={this.handleSubmit}>
+            <FormGroup controlId="nombre" bsSize="medium">
+              <ControlLabel>Nombre completo: </ControlLabel>
+              <FormControl value={this.state.nombre} onChange={this.handleChange}/>
+            </FormGroup>
+            <FormGroup controlId="cedula" bsSize="medium">
+              <ControlLabel>Número de identificación (cédula): </ControlLabel>
+              <FormControl value={this.state.cedula} onChange={this.handleChange} type="number"/>
+            </FormGroup>
+            <FormGroup controlId="edad" bsSize="medium">
+              <ControlLabel>Edad (en años cumplidos): </ControlLabel>
+              <FormControl value={this.state.cedula} onChange={this.handleChange} type="number"/>
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Género: </ControlLabel><br/>
+              <Radio name="radioGroup" inline>
+                Masculino
+              </Radio>{' '}
+              <Radio name="radioGroup" inline>
+                Femenino
+              </Radio>{' '}
+            </FormGroup>
+            <FormGroup controlId="formControlsSelect">
+              <ControlLabel>Etnia</ControlLabel>
+              <FormControl componentClass="select" placeholder="select">
+                <option value="select">select</option>
+                <option value="other">...</option>
+              </FormControl><br/>
+            </FormGroup>
+
+            <FormGroup>
+              <ControlLabel>Parentesco: </ControlLabel><br/>
+              <Radio name="radioGroup">
+                Hija(o)
+              </Radio>
+              <Radio name="radioGroup">
+                Alumna(o)
+              </Radio>
+              <Radio name="radioGroup">
+                A cuidado legalmente
+              </Radio>
+              
+              <Radio name="radioGroup">
+                    <input type="radio" aria-label="..." />
+                  <FormControl type="text" />
+              </Radio>
+            </FormGroup>
+
+            <FormGroup>
+              <Col sm={14}>
+                <Button style={caract} block bsSize="large" disabled={!this.validateForm} type="submit"> Registrar menor </Button>
+                <Button style={caract} block bsSize="large" type="submit" onClick={this.navigateHome}> Cancelar </Button>
+              </Col>
+            </FormGroup>
+
+          </form>
+
+        </div>
       </div>
     );
   }

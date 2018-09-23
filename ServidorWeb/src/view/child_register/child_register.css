@@ -7,4 +7,20 @@
     margin: 0 auto;
     max-width: 320px;
   }
+
+
+  .center-div-child-reg{
+	  position: absolute;
+	  margin: auto;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  width: 45%;
+	  height: 770px;
+	  background: #FFFFFF;
+	}
+	body{
+		background: #123456;
+	}
 }
