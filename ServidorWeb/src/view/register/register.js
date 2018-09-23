@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./register.css";
 import {routes} from '../../routes/routes.js';
+import * as stringSimilarity from 'string-similarity';
 
 class Register extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class Register extends Component {
 	   cedula: "",
 	   flagError: false,
 	   textError: "",
-	   tipoError: ""
+	   tipoError: "",
+	   errorCount: 0
     };
   }
   
@@ -26,17 +28,21 @@ class Register extends Component {
 	var passNumeroRE = /.*\d.*/;
 	var passEspecRE = /.*(!|@|\$|%|\*|\(|\)|<|>|\?|:|{|}|\+|-|~).*/;
 	var passNoRepRE = /^(?!.*(.)\1{2,}).+$/;
+	var passCompNombre = stringSimilarity.compareTwoStrings(this.state.nombre, this.state.password); 
+	var passCompCorreo = stringSimilarity.compareTwoStrings(this.state.correo, this.state.password); 
+
 	var nombreRE = /[A-Z][A-Za-z\s]*/;
 	var numeroRE = /\d+/;
 
-	var tamCorreo = this.state.correo.length >= 7 && this.state.correo <= 255;
+	var tamCorreo = this.state.correo.length >= 7 && this.state.correo.length <= 255;
 	var formatoCorreo = emailRE.exec(this.state.correo);
 	var correoValido = formatoCorreo && tamCorreo;
 
 	var tamPass = this.state.password.length > 6;
 	var caracPass = passMayusRE.exec(this.state.password) && passMinusRE.exec(this.state.password) && passNumeroRE.exec(this.state.password) && passEspecRE.exec(this.state.password);
     var repetPass = passNoRepRE.exec(this.state.password);
-	var passValido = tamPass && caracPass && repetPass;
+    var noSimPass = passCompNombre < 0.6 && passCompCorreo < 0.6;
+	var passValido = tamPass && caracPass && repetPass && noSimPass;
 
     var tamTelef = this.state.telefono.length === 8;
     var tipoTelef = numeroRE.exec(this.state.telefono);
@@ -50,100 +56,68 @@ class Register extends Component {
     var tipoCedula = numeroRE.exec(this.state.cedula);
 	var cedulaValida = tamCedula && tipoCedula;
 	
-	if (this.state.flagError) {
-	  switch (this.tipoError){
-		case "Correo-tamaño":
-		  if (tamCorreo) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		case "Correo-formato":
-		  if (formatoCorreo) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		case "Password-tamaño":
-		  if (tamPass) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		case "Password-caracteres":
-		  if (caracPass) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		case "Teléfono-tamaño":
-		  if (tamTelef) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		case "Teléfono-número":
-		  if (tipoTelef) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		case "Nombre-tamaño":
-		  if (tamNombre) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		case "Nombre-entrada":
-		  if (inputNombre) {
-	        this.setState({
-		      flagError: false,
-	          textError: "",
-	          tipoError: ""
-	        });
-		  }
-		  break;
-		default:
-		  break;
-	  }
+	let errors = 0;
+	let errorString = "";
+
+	if(!tipoCedula){
+		errors++;
+		errorString = "La identificación debe estar compuesta únicamente por dígitos."		
+	}
+	if(!tamCedula){
+		errors++;
+		errorString = "La identificación debe estar compuesta por 9 dígitos."		
+	}
+	if(!inputNombre){
+		errors++;
+		errorString = "Su nombre como encargado sólo debe contener símbolos alfabéticos (Aa-Zz)."		
+	}
+	if(!tamNombre){
+		errors++;
+		errorString = "Su nombre debe estar entre los 2 y los 35 caracteres."		
+	}
+	if(!tipoTelef){
+		errors++;
+		errorString = "El número de teléfono debe componerse sólo de dígitos numéricos."		
+	}
+	if(!tamTelef){
+		errors++;
+		errorString = "El número de teléfono debe estar compuesto por 8 dígitos."		
+	}
+	if(!noSimPass){
+		errors++;
+		errorString = "La contraseña no puede ser similar a su nombre y/o correo.";
+	}
+	if(!repetPass){
+		errors++;
+		errorString = "La contraseña no puede tener más de 2 caracteres repetidos consecutivos.";
+	}
+	if(!caracPass){
+		errors++;
+		errorString = "La contrseña debe contener al menos: Una mayúscula, una minúscula, un número, y un símbolo especial.";
+	}
+	if(!tamPass){
+		errors++;
+		errorString = "Su contraseña debe tener 7 caracteres, como mínimo.";
+	}
+	if(!formatoCorreo){
+		errors++;
+		errorString = "El formato del correo no es válido (ej. ejemplo@hotmail.com)."
+	}
+	if(!tamCorreo){
+		errors++;
+		errorString = "El tamaño del correo debe estar entre 7 y 255 caracteres."
 	}
 	
-	if (!this.state.flagError) {
-	  if (!tamCorreo) {
-	    this.setState({
-		  flagError: true,
-	      textError: "El correo electrónico debe estar entre 7 y 255 caracteres.",
-	      tipoError: "Correo"
-	    });
-	  }
-	  else if (!formatoCorreo){
-	    this.setState({
-		  flagError: true,
-	      textError: "El correo electrónico no sigue el formato adecuado (ej. ejemplo@hotmail.com)."	
-	    });
-	  }
+	let existerr = errors > 0;
+	console.log(tamCorreo);
+	if(errors !== this.state.errorCount){
+		this.setState({errorCount: errors,
+						textError: errorString,
+						flagError: existerr});
+		//this.forceUpdate();
+	
 	}
+
 	
     return correoValido && passValido && telefValido && nombreValido && cedulaValida;
   }
@@ -189,7 +163,7 @@ class Register extends Component {
           </FormGroup>
           <Button block bsSize="large" disabled={!this.validateForm()} type="submit"> Registrar usuario </Button>
         </form>
-        <h6>{this.state.flagError? this.state.textError : "No error"}</h6>
+        <h6>{this.state.flagError? this.state.textError : ""}</h6>
       </div>
     );
   }
