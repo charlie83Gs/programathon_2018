@@ -4,6 +4,7 @@ import Register from '../view/register/register.js';
 import Navigator from '../component/navigator.js';
 import ChildRegister from '../view/child_register/child_register.js'
 import RegistroAntecedentes from '../view/registro_antecedentes/registro_antecedentes.js'
+import Interprete from '../view/interprete/interprete.js'
 
 export const routes = {
 	"Default" : Login,
@@ -12,5 +13,6 @@ export const routes = {
 	"Navigator" : Navigator,
 	"Register": Register,
 	"ChildRegister": ChildRegister,
-	"RegistroAntecedentes": RegistroAntecedentes	
+	"RegistroAntecedentes": RegistroAntecedentes,
+	"Interprete": Interprete	
 };

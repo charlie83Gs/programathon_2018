@@ -1,0 +1,14 @@
+@media all and (min-width: 480px) {
+	.ContentInterprete{
+	  position: absolute;
+	  margin: auto;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  width: 60%;
+	  height: 630px;
+	  background: #FFFFFF;
+	}
+	
+}
