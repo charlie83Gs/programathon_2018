@@ -66,13 +66,13 @@ class Login extends Component {
             </FormGroup>
             <FormGroup>
               <Col smOffset={2} sm={9}>
-                <a>Registrarse.</a>
+                <a onClick={this.navigateRegister}>Registrarse</a>
               </Col>
             </FormGroup>
 
             <FormGroup>
               <Col smOffset={2} sm={9}>
-                <Button className={"tamButtom"} block bsSize="large" disabled={!this.validateForm()} type="submit"> Ingresar </Button>
+                <Button className={"tamButtom"} block bsSize="large" disabled={!this.validateForm()} type="submit" onClick={this.validateSession}> Ingresar </Button>
               </Col>
             </FormGroup>
           </Form>

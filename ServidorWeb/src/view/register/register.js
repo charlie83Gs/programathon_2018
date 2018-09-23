@@ -17,17 +17,20 @@ class Register extends Component {
   }
   
   validateForm() {
-	var emailRE = /\w+@\w+\.\w{2,4}$/;
+	var emailRE = /(\w|\.|-)+@\w+\.\w{2,4}$/;
 	var passMayusRE = /.*[A-Z].*/;
 	var passMinusRE = /.*[a-z].*/;
 	var passNumeroRE = /.*\d.*/;
-	var passEspecRE = /[A-Za-z0-9]*(!|@|\$|%|\*|\(|\)|<|>|\?|:|{|}|\+|-|~)[A-Za-z0-9]*/;
+	var passEspecRE = /.*(!|@|\$|%|\*|\(|\)|<|>|\?|:|{|}|\+|-|~).*/;
+	var passNoRepRE = /^(?!.*(.)\1{2,}).+$/;
+	var nombreRE = /[A-Z][A-Za-z\s]*/;
+	var numeroRE = /\d+/;
 
 	var correoValido = emailRE.exec(this.state.correo);
-	var passValido = this.state.password.length > 6 && passMayusRE.exec(this.state.password) && passMinusRE.exec(this.state.password) && passNumeroRE.exec(this.state.password)  && passEspecRE.exec(this.state.password);
-	var telefValido = this.state.telefono.length === 8;
-	var nombreValido = this.state.nombre.length >= 2 && this.state.nombre.length <= 35;
-	var cedulaValida = this.state.cedula.length === 9;
+	var passValido = this.state.password.length > 6 && passMayusRE.exec(this.state.password) && passMinusRE.exec(this.state.password) && passNumeroRE.exec(this.state.password)  && passEspecRE.exec(this.state.password) && passNoRepRE.exec(this.state.password);
+	var telefValido = this.state.telefono.length === 8 && numeroRE.exec(this.state.telefono);
+	var nombreValido = this.state.nombre.length >= 2 && this.state.nombre.length <= 35 && nombreRE.exec(this.state.nombre);
+	var cedulaValida = this.state.cedula.length === 9 && numeroRE.exec(this.state.cedula);
 	
     return correoValido && passValido && telefValido && nombreValido && cedulaValida;
   }
