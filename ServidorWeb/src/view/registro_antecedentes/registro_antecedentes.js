@@ -1,26 +1,74 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel,Radio,Col, InputGroup,Modal, Table } from "react-bootstrap";
 import './registro_antecedentes.css';
+import {routes} from '../../routes/routes.js';
 
 export const caract = {
   background: "#128056",
   color: "#FFFFFF"
 }
 
+var ending = /.pdf|.txt|.docx|.jpg|.png|.tiff|.tif/;
+
 class registro_antecedentes extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.handleHide = this.handleHide.bind(this);
+    this.handleHideArchivo = this.handleHideArchivo.bind(this);
+    this.handleHideLink = this.handleHideLink.bind(this);
+    this.navigateHome = this.navigateHome.bind(this);
+    this.tomaArchivo = this.tomaArchivo.bind(this);
 
     this.state = {
-      show: false
+      show: false,
+      showArchivo: false,
+      showLink: false,
+      file: undefined,
+      navigator: this.props.navigator
     };
+  }
+
+  tomaArchivo(evento){
+    let opening = evento.target.files[0];
+    if(ending.exec(opening.name)){ 
+      console.log(evento.target.files);
+     this.setState({file:evento.target.files[0]});
+    }
+    else{
+      //codigo que se ejecuta si el formato del archivo no es válido
+      
+    }
+
   }
 
   handleHide() {
     this.setState({ show: false });
   }
+
+  handleHideArchivo() {
+    this.setState({ showArchivo: false });
+  }
+
+
+  handleHideLink() {
+    this.setState({ showArchivo: false });
+  }
+
+
+  navigateHome(){
+  this.state.navigator.goToView(routes.Home);
+  }
+
+  FieldGroup({ id, label, help, ...props }) {
+    return (
+      <FormGroup controlId={id}>
+        <ControlLabel>{label}</ControlLabel>
+        <FormControl {...props} />
+      </FormGroup>
+    );
+  }
+
 
   render() {
     return (
@@ -71,11 +119,9 @@ class registro_antecedentes extends Component {
         
 
           <div align="center">
-            <Button style={caract}  bsSize="large" onClick={() => this.setState({ show: true })}>
-              Agregar un tipo de antecedente
-            </Button>
+            <Button style={caract}  bsSize="large" onClick={() => this.setState({ show: true })}>Agregar un tipo de antecedente</Button>
+            <Button style={caract}  bsSize="large" onClick={this.navigateHome}>Volver</Button>
           </div>
-
 
           <Modal
             show={this.state.show}
@@ -92,10 +138,58 @@ class registro_antecedentes extends Component {
   Seleccione el tipo de archivo en el que quiere importar el antecedente. El archivo soporta los siguientes formatos: pdf, txt, docx, jpg, png y tiff.
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.handleHide}>Archivo</Button>
-              <Button onClick={this.handleHide}>Enlace</Button>
+              <Button onClick={() => this.setState({ showArchivo: true, show: false })}>Archivo</Button>
+              <Button onClick={() => this.setState({ showLink: true, show: false })}>Enlace</Button>
             </Modal.Footer>
           </Modal>
+
+
+
+
+          <Modal
+            show={this.state.showArchivo}
+            onHide={this.handleHideArchivo}
+            container={this}
+            aria-labelledby="contained-modal-title"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title">
+                Agregue su archivo aquí:
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+          Por favor, suba acá el archivo.
+            <input type="file" onChange={this.tomaArchivo} accept=".pdf,.txt,.docx,.jpg,.png,.tiff,.tif"/>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleHideArchivo}>Cancelar</Button>
+            </Modal.Footer>
+          </Modal>
+
+
+          <Modal
+            show={this.state.showLink}
+            onHide={this.handleHideLink}
+            container={this}
+            aria-labelledby="contained-modal-title"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title">
+                Pegue su enlace acá:
+                *Agregar text*
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+          Por favor, suba acá el archivo.
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={this.handleHideArchivo}>Cancelar</Button>
+            </Modal.Footer>
+            
+            </Modal>
+
+
+
         </div>
       </div>
     );
