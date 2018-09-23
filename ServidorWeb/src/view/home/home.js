@@ -22,6 +22,7 @@ class Home extends Component {
   }
 
   navigateLogin(){
+   localStorage.setItem('session-id',undefined);
    this.state.navigator.goToView(routes.Login);
   }
 
