@@ -1,3 +1,4 @@
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,11 +7,16 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
+var createPacientRouter = require('./routes/createPacient');
+var session = require('express-session');
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+const PORT = 7070;
+
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
@@ -19,9 +25,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.listen(PORT);
+
+//session stuff
+var sess = {
+  secret: 'Cube solving cat',
+  //resave: false,
+  //saveUninitialized: true,
+  cookie: {}
+}
+
+app.use(session(sess))
+
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+app.use('/createpacient', createPacientRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -37,5 +60,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

@@ -9,20 +9,20 @@ CREATE PROCEDURE spInsertarUsuario
 	IN	pTelefono VARCHAR(40),
 	IN	pNombre VARCHAR(40),
 	IN	pCorreo VARCHAR(60),
-	IN	pCedula VARCHAR(20),
-	IN	pRol VARCHAR(20),
-	OUT oResult BOOL
+	IN	pCedula VARCHAR(20)
 )
 BEGIN
+	DECLARE result INT;
 	IF NOT EXISTS (SELECT id_usuario FROM usuario WHERE  correo LIKE pCorreo) THEN
-		INSERT INTO usuario(password_diggest,telefono,nombre,correo,cedula,rol,activo)
-		VALUES(pPassword_diggest,pTelefono,pNombre,pCorreo,pCedula,pRol,1);
+		INSERT INTO usuario(password_diggest,telefono,nombre,correo,cedula,activo)
+		VALUES(pPassword_diggest,pTelefono,pNombre,pCorreo,pCedula,1);
 
-		SET oResult = 1;
+		SET result = 1;
 	ELSE
-		SET oResult = 0;
+		SET result = 0;
 	END IF;
 
+	SELECT result;
 END //
 
 DELIMITER ;

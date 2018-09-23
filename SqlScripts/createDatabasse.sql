@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS usuario(
 	nombre VARCHAR(40),
 	correo VARCHAR(60),
 	cedula VARCHAR(20),
-	rol VARCHAR(20),
 	activo BOOL
 );
 

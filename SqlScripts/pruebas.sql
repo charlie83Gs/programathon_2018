@@ -3,7 +3,6 @@ CALL spInsertarUsuario('12345',
 						'Charlie',
 						'carlosgomezsoza@gmail.com',
 						'116660442',
-						'Desarrollador',
 						@valid
 );
 
@@ -14,7 +13,6 @@ CALL spInsertarUsuario('peda',
 						'Randall',
 						'rdm23@gmail.com',
 						'pedapedapeda',
-						'Desarrollador',
 						@valid
 );
 
@@ -53,3 +51,5 @@ CALL spInsertarMedicina(
 	);
 
 CALL spInsertarTratamientoFisico(1, 'masage de espalda con unhuento');
+	
+call spValidarUsuario('Charlie', '12l345');
