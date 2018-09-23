@@ -7,13 +7,8 @@
     margin: 0 auto;
     max-width: 320px;
   }
-  .middle{
-  	  background-color: #123456;
-      color: #FFFFFF;
-      max-width: 50%;
-      vertical-align: middle;
-      align-items: center;
-  }
+
+
   .centrado{
   	align-content: center;
   }
@@ -24,20 +19,17 @@
   }
 
   .tamButton{
-  	max-width: 60%;
+  	max-width: 100%;
   	border-color: #123456; 
-  	background: #FFFFFF;
+  	background-color: #FFFFFF;
   	color: #123456;
   }
+
 
   .centTitle{
   	text-align: center;
   }
 
-  .col-centered{
-  	float:none;
-  	margin: 0 auto;
-  }
   .center-div{
 	  position: absolute;
 	  margin: auto;
@@ -50,7 +42,7 @@
 	  background: #FFFFFF;
 	}
 
-	.divCuadro{
+	.divCuadro form{
 		background-color: #FFFFFF;
 		color: #123456;
 	}

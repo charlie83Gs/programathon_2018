@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, Col } from "react-bootstrap";
 import "./register.css";
 import {routes} from '../../routes/routes.js';
+
+export const caract = {
+  background: "#128056",
+  color: "#FFFFFF"
+}
 
 class Register extends Component {
   constructor(props) {
@@ -15,9 +20,18 @@ class Register extends Component {
 	   cedula: "",
 	   flagError: false,
 	   textError: "",
-	   tipoError: ""
+	   tipoError: "",
+     navigator: this.props.navigator
     };
+
+    this.navigateLogin = this.navigateLogin.bind(this);
+
   }
+  
+  navigateLogin(){
+    this.state.navigator.goToView(routes.Login);
+  }
+
   
   validateForm() {
 	var emailRE = /(\w|\.|-)+@\w+\.\w{2,4}$/;
@@ -165,31 +179,39 @@ class Register extends Component {
   render() {
     return (
       <div className="Register">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="correo" bsSize="large">
-            <ControlLabel>Correo electrónico: </ControlLabel>
-            <FormControl autoFocus type="correo" value={this.state.correo} onChange={this.handleChange}/>
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Contraseña (mayor a 6 caracteres): </ControlLabel>
-            <FormControl value={this.state.password} onChange={this.handleChange} type="password"/>
-          </FormGroup>
-          <FormGroup controlId="telefono" bsSize="large">
-            <ControlLabel>Teléfono celular: </ControlLabel>
-            <br/>
-            <FormControl type="number" value={this.state.telefono} onChange={this.handleChange}/>
-          </FormGroup>
-          <FormGroup controlId="nombre" bsSize="large">
-            <ControlLabel>Nombre completo: </ControlLabel>
-            <FormControl value={this.state.nombre} onChange={this.handleChange}/>
-          </FormGroup>
-          <FormGroup controlId="cedula" bsSize="large">
-            <ControlLabel>Número de identificación (cédula): </ControlLabel>
-            <FormControl value={this.state.cedula} onChange={this.handleChange} type="number"/>
-          </FormGroup>
-          <Button block bsSize="large" disabled={!this.validateForm()} type="submit"> Registrar usuario </Button>
-        </form>
+        <div className={"center-div-sign"}>
+          <h1 className={"centTitleSign"}>Registro Cube Medic</h1>
+          <form horizontal onSubmit={this.handleSubmit}>
+            <FormGroup controlId="correo" bsSize="large">
+              <ControlLabel>Correo electrónico: </ControlLabel>
+              <FormControl autoFocus type="correo" value={this.state.correo} onChange={this.handleChange}/>
+            </FormGroup>
+            <FormGroup controlId="password" bsSize="large">
+              <ControlLabel>Contraseña (mayor a 6 caracteres): </ControlLabel>
+              <FormControl value={this.state.password} onChange={this.handleChange} type="password"/>
+            </FormGroup>
+            <FormGroup controlId="telefono" bsSize="large">
+              <ControlLabel>Teléfono celular: </ControlLabel>
+              <br/>
+              <FormControl type="number" value={this.state.telefono} onChange={this.handleChange}/>
+            </FormGroup>
+            <FormGroup controlId="nombre" bsSize="large">
+              <ControlLabel>Nombre completo: </ControlLabel>
+              <FormControl value={this.state.nombre} onChange={this.handleChange}/>
+            </FormGroup>
+            <FormGroup controlId="cedula" bsSize="large">
+              <ControlLabel>Número de identificación (cédula): </ControlLabel>
+              <FormControl value={this.state.cedula} onChange={this.handleChange} type="number"/>
+            </FormGroup>
+            <FormGroup>
+              <Col>
+                <Button className={"tamButtonSign"} style={caract} block bsSize="large" disabled={!this.validateForm()} type="submit"> Registrar usuario</Button>
+                <Button className={"tamButtonSign"} style={caract} block bsSize="large" type="submit" onClick={this.navigateLogin}> Cancelar</Button>
+              </Col>
+            </FormGroup>
+          </form>
         <h6>{this.state.flagError? this.state.textError : "No error"}</h6>
+        </div>
       </div>
     );
   }
