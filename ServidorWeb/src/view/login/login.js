@@ -3,14 +3,19 @@ import { Button, FormGroup, FormControl, ControlLabel, Form, Col } from "react-b
 import "./login.css";
 import {routes} from '../../routes/routes.js';
 
+export const caract = {
+  background: "#128056",
+  color: "#FFFFFF"
+}
+
 class Login extends Component {
   constructor(props) {
-	super(props);
+  super(props);
   
     this.state = {
-	   correo: "",
-	   password: "",
-	   navigator: this.props.navigator
+     correo: "",
+     password: "",
+     navigator: this.props.navigator
     };
     
     this.validateSession = this.validateSession.bind(this);
@@ -19,7 +24,7 @@ class Login extends Component {
   }
   
   validateForm() {
-	var emailRE = /\w+@\w+\.\w{2,4}$/;
+  var emailRE = /\w+@\w+\.\w{2,4}$/;
     return (emailRE.exec(this.state.correo)) && (this.state.password.length > 0);
   }
 
@@ -34,17 +39,16 @@ class Login extends Component {
   }
   
   validateSession(){
-	this.state.navigator.goToView(routes.Home);
+  this.state.navigator.goToView(routes.Home);
   }
   
   navigateRegister(){
-	this.state.navigator.goToView(routes.Register);
+   this.state.navigator.goToView(routes.Register);
   }
   
   render() {
     return (
       <div className={"center-div"} >
-        <div className={""}>
           <h1 className={"centTitle"}>Cube Medic</h1>
           <Form className={"divCuadro"} horizontal>
             <FormGroup controlId="correo">
@@ -71,12 +75,11 @@ class Login extends Component {
             </FormGroup>
 
             <FormGroup>
-              <Col smOffset={2} sm={9}>
-                <Button className={"tamButtom"} block bsSize="large" disabled={!this.validateForm()} type="submit" onClick={this.validateSession}> Ingresar </Button>
+              <Col smOffset={1} sm={10}>
+                <Button className={"tamButtom"} style={caract} block bsSize="large" disabled={!this.validateForm()} type="submit" onClick={this.validateSession}> Ingresar </Button>
               </Col>
             </FormGroup>
           </Form>
-        </div>
       </div>
     );
   }

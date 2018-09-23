@@ -7,4 +7,27 @@
     margin: 0 auto;
     max-width: 320px;
   }
+
+    .centTitleSign{
+  	text-align: center;
+  }
+	
+	.center-div-sign{
+	  position: absolute;
+	  margin: auto;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  width: 45%;
+	  height: 630px;
+	  background: #FFFFFF;
+	}
+
+  .tamButtonSign{
+  	max-width: 100%;
+  	border-color: #123456; 
+  	background-color: #FFFFFF;
+  	color: #123456;
+  }
 }
