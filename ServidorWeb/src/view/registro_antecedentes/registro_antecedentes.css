@@ -1,2 +1,28 @@
 @media all and (min-width: 480px) {
+	.center-div-antecedentes{
+	  position: absolute;
+	  margin: auto;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  width: 60%;
+	  height: 630px;
+	  background: #FFFFFF;
+	}
+
+	.tamButtonAntecedentes{
+  		max-width: 100%;
+  		border-color: #123456; 
+  		background-color: #FFFFFF;
+  		color: #123456;
+  	}
+
+  	.tablaDim{
+  		max-width: 80%;
+  		align-content: center;
+		margin: absolute;
+
+  	}
+
 }
