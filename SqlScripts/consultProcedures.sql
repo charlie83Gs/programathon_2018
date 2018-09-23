@@ -47,6 +47,8 @@ END //
 
 DELIMITER ;
 
+
+
 DROP PROCEDURE IF EXISTS spGetEtenias;
 
 DELIMITER //

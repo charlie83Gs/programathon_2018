@@ -11,13 +11,12 @@ CREATE PROCEDURE spValidarUsuario
 )
 BEGIN
 	DECLARE  result INT;
-	IF EXISTS (SELECT pNombre FROM usuario WHERE pNombre LIKE nombre AND pPassword_diggest LIKE password_diggest) THEN
-		SET result = 1;
+	IF EXISTS (SELECT nombre FROM usuario WHERE pCorreo LIKE correo AND pPassword_diggest LIKE password_diggest) THEN
+		SELECT id_usuario AS result FROM usuario where pCorreo Like correo AND pPassword_diggest LIKE password_diggest LIMIT 1;
 	ELSE
 		SET result = 0;
+		SELECT result;
 	END IF;
-
-	SELECT result;
 END //
 
 DELIMITER ;

@@ -184,7 +184,7 @@ module.exports.insertarTratamientoFisico = function(id_tratamiento,detalle,callb
 
 module.exports.getEtnias = function(callback){
 	let connection = createConnection();
-	console.log("getting Etnias");
+	//console.log("getting Etnias");
 	let sql = 'CALL spGetEtnias()';
 	result = false;
 	connect(connection);
@@ -192,8 +192,13 @@ module.exports.getEtnias = function(callback){
 		if(err) {
 	     console.log(err);  
 	 	}else{
-		console.log(rows);
-		callback();
+	 	result = [];
+	 	for(let i = 0 ;i < rows[0].length; i++){
+	 		result.push(rows[0][i].nombre);
+	 		//console.log(rows[0][i].nombre);
+	 	}
+		
+		callback(result);
 	 	connection.end();
 	 	}
 	});

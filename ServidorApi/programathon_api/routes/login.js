@@ -8,24 +8,20 @@ router.get('/', function(req, res, next) {
 	if(user !== undefined && pass !== undefined){
 		//console.log(req.params.username + "   " + req.params.password)
 	db.validateUserCorreo(user,pass,function(result){
-		req.session.user = {};
-		if(result){
-			req.session.user.valid = true;
+		if(result){		
 			db.getUserId(user, function(id_usuario){
-				req.session.user.id_usuario = id_usuario;
-				res.send({valid : result});
-				//console.log("req " + req.session.user.id_usuario);
+				//console.log(id_usuario);
+				res.send({valid : true, id : id_usuario});
+				
 			});
 
 		}else{
-			req.session.user.valid = false;
-			res.send({valid : false});
+			res.send({valid : false, id : - 1 });
 		}
-		
 	});
 	}else{
-		req.session.valid = false;
-		res.send({valid : false});
+
+		res.send({valid : false, id: -1});
 	}
 
 });

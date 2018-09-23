@@ -42,12 +42,14 @@ class Login extends Component {
   
   validateSession(){
     console.log("validating...");
-    fetch(constants.API_URL + ":"+ constants.API_PORT+"/login?correo="+this.state.correo+"&password="+this.state.password).then(
+    fetch(constants.API_URL + ":"+ constants.API_PORT+"/login?correo="+this.state.correo+"&password="+this.state.password
+      ).then(
         results => {
           return results.json();
         }).then((result) =>{ 
           console.log(result)
           if(result.valid){
+            localStorage.setItem('session-id', result.id);
             this.state.navigator.goToView(routes.Home);
           }
           }

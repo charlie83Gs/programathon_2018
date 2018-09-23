@@ -6,23 +6,27 @@ var db = require('../src/controller/dbController.js');
 
 router.get('/', function(req, res, next) {
 	let name = req.query.username;
-	let phone = req.query.phone;
 	let cedula = req.query.cedula;
 	let edad = req.query.edad;
 	let parentesco = req.query.parentesco;
 	let genero = req.query.genero;
 	let etnia = req.query.etnia;
-	//console.log(user+phone+cedula+genero+etnia);
-	if(name !== undefined && genero !== undefined && phone !== undefined && cedula !== undefined && etnia !== undefined && edad !== undefined && parentesco !== undefined){
-		db.getAmountPacientes(req.session.user.id_usuario, function(result){
+	let user_id = req.query.user_id;
+
+	if(user_id !== undefined && name !== undefined && genero !== undefined && cedula !== undefined && etnia !== undefined && edad !== undefined && parentesco !== undefined){
+
+		db.getAmountPacientes(user_id, function(result){
 			if(result < 5){
-				db.insertPacient(name,req.session.user.id_usuario,cedula,edad,genero,parentesco,1,function(){});
+				db.insertPacient(name,user_id,cedula,edad,genero,parentesco,1,function(){});
+				res.send({valid : true, total_children : result});
+			}else{
+				res.send({valid : false, total_children : result});
 			}
 			console.log("pacient amount: " + result);
 		});
-		res.send({valid : true});
+		
 	}else{
-		res.send({valid : false});
+		res.send({valid : false, total_children : -1});
 	}
 });
 
