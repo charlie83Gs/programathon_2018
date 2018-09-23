@@ -28,7 +28,7 @@ class Register extends Component {
     };
 
     this.navigateLogin = this.navigateLogin.bind(this);
-
+    this.validateSession = this.validateSession.bind(this);
   }
   
   navigateLogin(){
@@ -160,11 +160,12 @@ class Register extends Component {
         	console.log(results)
           return results.json();
         }).then((result) =>{ 
-          console.log(result)
-          }
-        );
-	this.state.navigator.goToView(routes.Home);
-  }  
+        	 	this.state.navigator.goToView(routes.Login);
+        	}
+          );	
+  } 
+
+
 
   render() {
     return (
@@ -195,8 +196,8 @@ class Register extends Component {
             </FormGroup>
             <FormGroup>
               <Col>
-                <Button className={"tamButtonSign"} style={caract} block bsSize="large" disabled={!this.validateForm()} type="submit"> Registrar usuario</Button>
-                <Button className={"tamButtonSign"} style={caract} block bsSize="large" type="submit" onClick={this.validateSession}> Cancelar</Button>
+                <Button className={"tamButtonSign"} style={caract} block bsSize="large" disabled={!this.validateForm()} onClick={this.validateSession}> Registrar usuario</Button>
+                <Button className={"tamButtonSign"} style={caract} block bsSize="large" type="submit" onClick={this.navigateLogin}> Cancelar</Button>
               </Col>
             </FormGroup>
           </form>

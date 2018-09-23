@@ -53,7 +53,7 @@ class Login extends Component {
           }
         );
 
-  this.state.navigator.goToView(routes.Home);
+  //this.state.navigator.goToView(routes.Home);
   }
   
   navigateRegister(){
