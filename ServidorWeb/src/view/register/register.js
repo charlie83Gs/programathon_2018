@@ -21,10 +21,10 @@ class Register extends Component {
 	var passMayusRE = /.*[A-Z].*/;
 	var passMinusRE = /.*[a-z].*/;
 	var passNumeroRE = /.*\d.*/;
-	//var passEspecRE = /.*[!@$%*()<>?:{}+‐~].*/;
+	var passEspecRE = /[A-Za-z0-9]*(!|@|\$|%|\*|\(|\)|<|>|\?|:|{|}|\+|-|~)[A-Za-z0-9]*/;
 
 	var correoValido = emailRE.exec(this.state.correo);
-	var passValido = this.state.password.length > 6 && passMayusRE.exec(this.state.password) && passMinusRE.exec(this.state.password) && passNumeroRE.exec(this.state.password);
+	var passValido = this.state.password.length > 6 && passMayusRE.exec(this.state.password) && passMinusRE.exec(this.state.password) && passNumeroRE.exec(this.state.password)  && passEspecRE.exec(this.state.password);
 	var telefValido = this.state.telefono.length === 8;
 	var nombreValido = this.state.nombre.length >= 2 && this.state.nombre.length <= 35;
 	var cedulaValida = this.state.cedula.length === 9;
